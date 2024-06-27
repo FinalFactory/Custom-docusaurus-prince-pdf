@@ -1,0 +1,26 @@
+{
+  "name": "custom-docusaurus-prince-pdf",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Extract rendered data from Docusaurus and generate PDF",
+  "dependencies": {
+    "@types/node": "^20.14.9",
+    "bun": "^1.1.17",
+    "happy-dom": "^14.7.1",
+    "jsdom": "24.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7"
+  }
+}
