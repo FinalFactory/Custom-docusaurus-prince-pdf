@@ -122,7 +122,7 @@ async function generatePdf(list: string, filename: string, cookie?: string) {
 
   const princeCmd = values['prince-args']
     ? `docker run --rm -i -v ${__dirname}:/config sparanoid/prince --no-warn-css --style=/config/print.css ${cookieArg} --input-list=/config/${list} -o /config/${filename} ${args}`
-    : `prince --no-warn-css --style=${__dirname}print.css ${cookieArg} --input-list=${list} -o ${filename} ${args}`
+    : `prince --no-warn-css --style=${__dirname}print.css ${cookieArg} --input-list=${list} -o ${filename} ${args} --page-size='210mm 297mm'`
   console.log(`Executing command: ${princeCmd}`)
 
   // TODO: https://github.com/oven-sh/bun/issues/9747
