@@ -188,8 +188,12 @@ async function requestPage(url: string) {
       if (values.append) {
         values.append.split(',').forEach(async (item) => {
           const url = item.match(/^https?:\/\//) ? item : `${baseUrl}${scope}${item}`
-          buffer.add(url)
-          console.log(`Got link: ${url} [append]`)
+          //check if not already added
+          if (!buffer.has(url))
+          {
+            buffer.add(url)
+            console.log(`Got link: ${url} [append]`)
+          }
         })
       }
 
