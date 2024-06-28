@@ -116,7 +116,7 @@ function generatePdf(list, filename, cookie) {
         const cookieArg = cookie ? `--cookie "${cookie}"` : '';
         const princeCmd = values['prince-args']
             ? `docker run --rm -i -v ${__dirname}:/config sparanoid/prince --no-warn-css --style=/config/print.css ${cookieArg} --input-list=/config/${list} -o /config/${filename} ${args}`
-            : `prince --no-warn-css --style=${__dirname}print.css ${cookieArg} --input-list=${list} -o ${filename} ${args}`;
+            : `prince --no-warn-css --style=${__dirname}print.css ${cookieArg} --input-list=${list} -o ${filename} ${args} --page-size='210mm 297mm'`;
         console.log(`Executing command: ${princeCmd}`);
         // TODO: https://github.com/oven-sh/bun/issues/9747
         // await $`${princeCmd}`
@@ -173,8 +173,11 @@ function requestPage(url) {
                 if (values.append) {
                     values.append.split(',').forEach((item) => __awaiter(this, void 0, void 0, function* () {
                         const url = item.match(/^https?:\/\//) ? item : `${baseUrl}${scope}${item}`;
-                        buffer.add(url);
-                        console.log(`Got link: ${url} [append]`);
+                        //check if not already added
+                        if (!buffer.has(url)) {
+                            buffer.add(url);
+                            console.log(`Got link: ${url} [append]`);
+                        }
                     }));
                 }
                 if (buffer.size > 0) {
