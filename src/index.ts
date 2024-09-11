@@ -210,6 +210,7 @@ async function requestPage(url: string) {
         })
 
         if (!values['list-only']) {
+		  await delay(1000);
           generatePdf(listFile, pdfFile, values.cookie)
         }
       } else {
