@@ -199,19 +199,20 @@ async function requestPage(url: string) {
 
       if (buffer.size > 0) {
         console.log(`Writing buffer (${buffer.size} links) to ${listFile}`)
-        await fs.mkdir(path.dirname(listFile), { recursive: true }, async (err) => {
-          await fs.writeFile(listFile, [...buffer].join('\n'), (err) => {
+        fs.mkdir(path.dirname(listFile), { recursive: true }, async (err) => {
+          fs.writeFile(listFile, [...buffer].join('\n'), (err) => {
             if (err) {
               console.error('Error writing file:', err);
             } else {
               console.log('File written successfully to', listFile);
             }
-          })
+          });
         })
 
         if (!values['list-only']) {
-		  await delay(1000);
-          generatePdf(listFile, pdfFile, values.cookie)
+		      setTimeout(() => {
+            generatePdf(listFile, pdfFile, values.cookie);
+          }, 1000);
         }
       } else {
         console.log('No buffer to write!')
